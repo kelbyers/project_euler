@@ -32,3 +32,28 @@
   (Math/sqrt n)
   (rem 6 3)
   :rcf)
+
+(comment
+  ;; more efficient prime factoriztion using Sieve of Eratosthenes
+
+  (def problem 600851475143)
+  (defn sieve [s]
+    (cons (first s)
+          (lazy-seq (sieve (filter #(not= 0 (mod % (first s)))
+                                   (rest s))))))
+  (defn se [] (sieve (iterate inc 2)))
+  (defn pe
+    ([n] (pe n (se)))
+    ([n s] (let [f (first s)]
+             (if (zero? (rem n f))
+               (cons f (pe (/ n f) s))
+               (when (< f n) (pe n (rest s)))))))
+  (apply max (pe problem))
+  ;; scratch
+  (pe 8)
+  (def n 2)
+  (def f (first (se)))
+  (zero? (rem n f))
+  (/ n f)
+  (take 3 (se))
+  :rcf)
