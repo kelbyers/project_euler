@@ -1,0 +1,6 @@
+[package]
+name = "e001_mult_3_or_5"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
